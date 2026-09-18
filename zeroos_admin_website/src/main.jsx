@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import {createStytchClient, StytchProvider} from "@stytch/react";
 import { BrowserRouter, Routes, Route } from 'react-router';
 import { Authenticate } from './Authenticate.jsx';
-import { ViewSession } from './ViewSession.jsx';
 import './index.css'
 import App from './App.jsx'
 import { Login } from './Login.jsx';
@@ -18,7 +17,6 @@ createRoot(document.getElementById('root')).render(
           <Route path="/" element={<App />} />
           <Route path="/login" element={<Login />} />
           <Route path="/authenticate" element={<Authenticate />} />
-          <Route path="/view-session" element={<ViewSession />} />
         </Routes>        
       </BrowserRouter>
     </StytchProvider>
