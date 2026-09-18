@@ -12,8 +12,9 @@
 	},
 	"dependencies": {
 		"@stytch/react": "^20.3.0",
-		"react": "^19.2.8",
-		"react-dom": "^19.2.8"
+		"react": "^19.3.0",
+		"react-dom": "^19.2.8",
+		"react-router": "^8.4.0"
 	},
 	"devDependencies": {
 		"@cloudflare/vite-plugin": "^1.56.0",
