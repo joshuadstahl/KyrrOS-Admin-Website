@@ -1,4 +1,4 @@
-import { ErrorBox, LoadingSpinner, Page } from "@stytch-all-examples/internal";
+// import { ErrorBox, LoadingSpinner, Page } from "@stytch-all-examples/internal";
 import { useStytch, useStytchSession } from "@stytch/react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
@@ -68,12 +68,6 @@ export function Authenticate() {
   }, [session?.session_id]);
 
   return (
-    <Page>
-      {error ? (
-        <ErrorBox title="You've hit an error" error={error} />
-      ) : (
-        <LoadingSpinner />
-      )}
-    </Page>
+    "loading"
   );
 }
