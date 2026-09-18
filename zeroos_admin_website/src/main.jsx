@@ -4,7 +4,7 @@ import {createStytchClient, StytchProvider} from "@stytch/react";
 import './index.css'
 import App from './App.jsx'
 
-const stytch = createStytchClient("public-token-here");
+const stytch = createStytchClient("public-token-test-9a31df33-02d8-466c-8825-fae6c2893ddb");
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
