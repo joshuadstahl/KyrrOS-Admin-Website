@@ -10,6 +10,6 @@ const config = {
   },
 };
 
-const LoginOrSignup = () => {
+export const LoginOrSignup = () => {
   return <StytchLogin config={config} />;
 };
