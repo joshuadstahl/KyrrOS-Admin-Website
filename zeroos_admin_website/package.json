@@ -1,5 +1,5 @@
 {
-	"name": "flat-night-8df3",
+	"name": "misty-waterfall-398c",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -7,23 +7,19 @@
 		"dev": "vite",
 		"build": "vite build",
 		"lint": "eslint .",
-		"preview": "npm run build && wrangler pages dev",
-		"deploy": "npm run build && wrangler pages deploy",
-		"cf-typegen": "wrangler types"
+		"preview": "npm run build && vite preview",
+		"deploy": "npm run build && wrangler deploy"
 	},
 	"dependencies": {
-		"@cloudflare/pages-plugin-stytch": "^1.0.3",
 		"react": "^19.2.8",
 		"react-dom": "^19.2.8"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.29.7",
+		"@cloudflare/vite-plugin": "^1.56.0",
 		"@eslint/js": "^10.0.1",
-		"@rolldown/plugin-babel": "^0.2.3",
 		"@types/react": "^19.2.18",
 		"@types/react-dom": "^19.2.7",
 		"@vitejs/plugin-react": "^6.1.1",
-		"babel-plugin-react-compiler": "^1.0.0",
 		"eslint": "^10.10.0",
 		"eslint-plugin-react-hooks": "^7.1.1",
 		"eslint-plugin-react-refresh": "^0.5.6",

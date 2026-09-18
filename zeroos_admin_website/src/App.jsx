@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
+import cloudflareLogo from './assets/cloudflare.svg'
+import heroImg from './assets/hero.png'
 import './App.css'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [name, setName] = useState('unknown')
 
   return (
     <>
@@ -16,18 +18,36 @@ function App() {
           <img src={viteLogo} className="vite" alt="Vite logo" />
         </div>
         <div>
-          <h1>Get started</h1>
+          <h1>Get started with Cloudflare</h1>
           <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+            Edit <code>src/App.jsx</code> or <code>worker/index.js</code> and save to test <code>HMR</code>
           </p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+        <ul style={{ display: 'flex', gap: '1rem', listStyle: 'none', padding: 0 }}>
+          <li>
+            <button
+              className="counter"
+              onClick={() => setCount((count) => count + 1)}
+            >
+              Count is {count}
+            </button>
+          </li>
+          <li>
+          <button
+            className="counter"
+            onClick={() => {
+              fetch('/api/')
+                .then((res) => res.json())
+                .then((data) => setName(data.name))
+            }}
+            aria-label='get name'
+          >
+            Name from API is: {name}
+          </button>
+          </li>
+        </ul>
+
+
       </section>
 
       <div className="ticks"></div>
@@ -50,6 +70,12 @@ function App() {
               <a href="https://react.dev/" target="_blank">
                 <img className="button-icon" src={reactLogo} alt="" />
                 Learn more
+              </a>
+            </li>
+            <li>
+              <a href="https://workers.cloudflare.com/" target="_blank">
+                <img className="button-icon" src={cloudflareLogo} alt="" />
+                Workers Docs
               </a>
             </li>
           </ul>
