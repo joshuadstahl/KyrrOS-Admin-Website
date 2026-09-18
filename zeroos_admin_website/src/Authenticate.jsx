@@ -1,4 +1,3 @@
-// import { ErrorBox, LoadingSpinner, Page } from "@stytch-all-examples/internal";
 import { useStytch, useStytchSession } from "@stytch/react";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
@@ -20,7 +19,7 @@ export function Authenticate() {
   useEffect(() => {
     // If the user already has a session, redirect to the logged-in landing page
     if (session) {
-      navigate("/view-session");
+      navigate("/");
     } else {
       // Get the token from the URL
       const urlParams = new URLSearchParams(window.location.search);
@@ -52,7 +51,7 @@ export function Authenticate() {
               "The token type found in the URL is not supported for this example app.",
             );
           }
-          navigate("/view-session");
+          navigate("/");
         } catch (error) {
           isAuthenticatingRef.current = false; // Reset on error
           setError(error.message);
