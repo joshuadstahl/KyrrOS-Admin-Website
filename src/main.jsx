@@ -7,11 +7,12 @@ import './index.css'
 import App from './App.jsx'
 import { Login } from './Login.jsx';
 
-const stytch = createStytchClient("public-token-test-9a31df33-02d8-466c-8825-fae6c2893ddb");
+const stytchLIVE = createStytchClient("public-token-live-db45c569-6f68-43db-bfe9-621f140e1777");
+console.log("MAIN!");
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <StytchProvider stytch={stytch}>
+    <StytchProvider stytch={stytchLIVE}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />} />

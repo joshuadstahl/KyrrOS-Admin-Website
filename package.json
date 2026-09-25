@@ -1,5 +1,5 @@
 {
-	"name": "misty-waterfall-398c",
+	"name": "kyrros-admin-website",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -8,7 +8,8 @@
 		"build": "vite build",
 		"lint": "eslint .",
 		"preview": "npm run build && vite preview",
-		"deploy": "npm run build && wrangler deploy"
+		"deploy": "npm run build && wrangler pages deploy dist",
+		"logs": ">npx wrangler pages deployment tail --project-name kyrros-admin-website"
 	},
 	"dependencies": {
 		"@cloudflare/pages-plugin-stytch": "^1.0.3",

@@ -4,7 +4,7 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "zeroos_admin_website",
+	"name": "kyrros-admin-website",
 	"main": "worker/index.js",
 	"compatibility_date": "2026-09-16",
 	"assets": {
@@ -15,9 +15,10 @@
 	},
 	"upload_source_maps": true,
 	"vars": {
-		"STYTCH_ENV": "public_test",
-    	"STYTCH_PROJECT_ID": "project-test-316ab7e6-55c9-4b3b-bb8d-a40441ee6b1f"
-	}
+		"STYTCH_ENV": "public_production",
+    	"STYTCH_PROJECT_ID": "project-live-6681896c-a952-42b0-a59b-7bcb11d17799"
+	},
+	// "pages_build_output_dir": "./dist"
 
 	/**
 	 * Smart Placement
