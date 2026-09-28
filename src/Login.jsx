@@ -1,10 +1,10 @@
-console.log("file loaded");
+//console.log("file loaded");
 
 import { useStytchSession } from "@stytch/react";
 import { Navigate } from "react-router";
 import { LoginOrSignup } from "./LoginOrSignup";
 
-console.log("made it past imports");
+//console.log("made it past imports");
 
 export const Login = () => {
   const { session } = useStytchSession();
@@ -13,8 +13,7 @@ export const Login = () => {
 
   if (session) {
     
-    //return <Navigate to="/" />;
-    return <h1>Already logged in</h1>;
+    return <Navigate to="/" />;
   }
 
   return <LoginOrSignup />;

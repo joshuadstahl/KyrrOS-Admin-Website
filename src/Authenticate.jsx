@@ -46,6 +46,12 @@ export function Authenticate() {
             await stytch.magicLinks.authenticate(token, {
               session_duration_minutes: 60,
             });
+          }
+          else if (tokenType === "otp") {
+            // Stytch SDK method to authenticate an OTP token
+            await stytch.otps.authenticate(token, {
+              session_duration_minutes: 60,
+            });
           } else {
             setError(
               "The token type found in the URL is not supported for this example app.",
