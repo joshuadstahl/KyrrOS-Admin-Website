@@ -1,51 +1,84 @@
-import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import cloudflareLogo from './assets/cloudflare.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
+import { useNavigate } from "react-router";
+import { useStytchUser } from "@stytch/react";
+import {useState, useEffect} from 'react';
+
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [name, setName] = useState('unknown')
+  const navigate = useNavigate()
+  const {user} = useStytchUser();
+  const [apps, setApps] = useState([]);
+  const [devices, setDevices] = useState([]);
+
+  useEffect(() => {
+    const fetchApps = async () => {
+      try {
+        const response = await fetch('/api/web/apps');
+        const data = await response.json();
+        setApps(data);
+      } catch (error) {
+        console.error('Failed to fetch apps:', error);
+      }
+    }
+
+    const fetchDevices = async () => {
+      try {
+        const response = await fetch('/api/web/devices');
+        const data = await response.json();
+        setDevices(data);
+      } catch (error) {
+        console.error('Failed to fetch devices:', error);
+      }
+    }
+    
+    if (user) {
+      fetchApps();
+      fetchDevices();
+    }
+  }, []);
 
   return (
     <>
       <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
         <div>
-          <h1>Get started with Cloudflare</h1>
+          <h1>KyrrOS Dashboard</h1>
           <p>
-            Edit <code>src/App.jsx</code> or <code>worker/index.js</code> and save to test <code>HMR</code>
+            {user ? `Welcome, you are logged in as ${user.emails[0].email}` : "You are not logged in."}
           </p>
         </div>
         <ul style={{ display: 'flex', gap: '1rem', listStyle: 'none', padding: 0 }}>
           <li>
-            <button
-              className="counter"
-              onClick={() => setCount((count) => count + 1)}
-            >
-              Count is {count}
-            </button>
-          </li>
-          <li>
           <button
             className="counter"
-            onClick={() => {
-              fetch('/api/')
-                .then((res) => res.json())
-                .then((data) => setName(data.name))
-            }}
-            aria-label='get name'
+            onClick={() => {navigate('/login')}}
           >
-            Name from API is: {name}
+            Login
+          </button>
+          <button
+            className="counter"
+            onClick={() => {navigate('/logout')}}
+          >
+            Logout
           </button>
           </li>
         </ul>
+        <div>
+          {apps ? apps.map(app => (
+            <div key={app.displayname}>
+              <h2>{app.displayname}</h2>
+              <img height="100" width="100" src={app.imageLink} alt={app.displayname} />
+            </div>
+          )) : null}
+          {devices ? devices.map(device => (
+            <div key={device.id}>
+              <h2>{device.name}</h2>
+              <p>{device.imei}</p>
+            </div>
+          )) : null}
+        </div>
 
 
       </section>
