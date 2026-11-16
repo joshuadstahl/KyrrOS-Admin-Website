@@ -75,7 +75,8 @@ function App() {
           {devices ? devices.map(device => (
             <div key={device.id}>
               <h2>{device.name}</h2>
-              <p>{device.imei}</p>
+              <p>ID: {device.id}</p>
+              <p>IMEI: {device.imei}</p>
             </div>
           )) : null}
         </div>
