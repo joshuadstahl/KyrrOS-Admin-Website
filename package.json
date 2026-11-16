@@ -9,7 +9,7 @@
 		"lint": "eslint .",
 		"preview": "npm run build && vite preview",
 		"deploy": "npm run build && wrangler pages deploy dist",
-		"logs": ">npx wrangler pages deployment tail --project-name kyrros-admin-website"
+		"logs": "npx wrangler pages deployment tail --project-name kyrros-admin-website"
 	},
 	"dependencies": {
 		"@cloudflare/pages-plugin-stytch": "^1.0.3",
