@@ -1,6 +1,3 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import cloudflareLogo from './assets/cloudflare.svg'
 import './App.css'
 import { useNavigate } from "react-router";
 import { useStytchUser } from "@stytch/react";
@@ -12,6 +9,14 @@ function App() {
   const {user} = useStytchUser();
   const [apps, setApps] = useState([]);
   const [devices, setDevices] = useState([]);
+  const [pageState, setPageState] = useState("home");
+  const [currDevice, setCurrDevice] = useState(null);
+  const [currDeviceApps, setCurrDeviceApps] = useState([]);
+
+  const setCurrDeviceOnClick = (device) => {
+    setCurrDevice(device);
+    setPageState("deviceapps");
+  }
 
   useEffect(() => {
     const fetchApps = async () => {
@@ -33,10 +38,21 @@ function App() {
         console.error('Failed to fetch devices:', error);
       }
     }
+
+    const fetchDeviceApps = async (currDevice) => {
+      try {
+        const response = await fetch(`/api/web/deviceApps/${currDevice.Id}`);
+        const data = await response.json();
+        setCurrDeviceApps(data);
+      } catch (error) {
+        console.error('Failed to fetch device apps:', error);
+      }
+    }
     
     if (user) {
       fetchApps();
       fetchDevices();
+      fetchDeviceApps();
     }
   }, []);
 
@@ -66,112 +82,31 @@ function App() {
           </li>
         </ul>
         <div>
-          {apps ? apps.map(app => (
+          {/* {apps ? apps.map(app => (
             <div key={app.displayname}>
               <h2>{app.displayname}</h2>
               <img height="100" width="100" src={app.imageLink} alt={app.displayname} />
             </div>
-          )) : null}
-          {devices ? devices.map(device => (
-            <div key={device.id}>
+          )) : null} */}
+          {pageState === "home" && devices ? devices.map(device => (
+            <div key={device.id} onClick={() => setCurrDeviceOnClick(device)}>
               <h2>{device.name}</h2>
               <p>ID: {device.id}</p>
               <p>IMEI: {device.imei}</p>
             </div>
-          )) : null}
+          )) : <p>There are no devices associated with your account.</p>}
+          {pageState === "deviceapps" ? currDevice && currDeviceApps.map(app => (
+            <div key={app.displayname}>
+              <h2>{app.displayname}</h2>
+              <img height="100" width="100" src={app.imageLink} alt={app.displayname} />
+            </div>
+          )) : <p>No apps for this device.</p>}
         </div>
 
 
       </section>
 
       <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-            <li>
-              <a href="https://workers.cloudflare.com/" target="_blank">
-                <img className="button-icon" src={cloudflareLogo} alt="" />
-                Workers Docs
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
       <div className="ticks"></div>
       <section id="spacer"></section>
