@@ -13,11 +13,6 @@ function App() {
   const [currDevice, setCurrDevice] = useState(null);
   const [currDeviceApps, setCurrDeviceApps] = useState([]);
 
-  const setCurrDeviceOnClick = (device) => {
-    setCurrDevice(device);
-    setPageState("deviceapps");
-  }
-
   useEffect(() => {
     const fetchApps = async () => {
       try {
@@ -89,7 +84,8 @@ function App() {
             </div>
           )) : null} */}
           {pageState === "home" && devices ? devices.map(device => (
-            <div key={device.id} onClick={() => setCurrDeviceOnClick(device)}>
+            <div key={device.id} onClick={() => {setCurrDevice(device);
+                  setPageState("deviceapps")}}>
               <h2>{device.name}</h2>
               <p>ID: {device.id}</p>
               <p>IMEI: {device.imei}</p>
