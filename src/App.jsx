@@ -10,7 +10,7 @@ function App() {
   const [apps, setApps] = useState([]);
   const [devices, setDevices] = useState([]);
   const [pageState, setPageState] = useState("home");
-  const [currDeviceId, setCurrDeviceId] = useState(null);
+  const [currDeviceId, setCurrDeviceId] = useState(0);
   const [currDeviceApps, setCurrDeviceApps] = useState([]);
 
   useEffect(() => {
@@ -35,6 +35,7 @@ function App() {
     }
 
     const fetchDeviceApps = async (currDeviceId) => {
+      if (currDeviceId === 0) return;
       try {
         const response = await fetch(`/api/web/deviceApps/${currDeviceId}`);
         const data = await response.json();
@@ -92,12 +93,12 @@ function App() {
               <p>IMEI: {device.imei}</p>
             </div>
           )) : <p>There are no devices associated with your account.</p>)}
-          {pageState === "deviceapps" && (currDeviceApps != [] ? currDeviceApps.map(app => (
+          {pageState === "deviceapps" && (currDeviceApps != [] ? (currDeviceApps.map(app => (
             <div key={app.displayname}>
               <h2>{app.displayname}</h2>
               <img height="100" width="100" src={app.imageLink} alt={app.displayname} />
             </div>
-          )) : <p>No apps for this device.</p>)}
+          )) && <a href="#"onClick={() => {setCurrDeviceId(0); setPageState("home")}}>Back</a>) : <p>No apps for this device.</p>)}
         </div>
 
 
