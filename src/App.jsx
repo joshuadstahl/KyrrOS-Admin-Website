@@ -10,7 +10,7 @@ function App() {
   const [apps, setApps] = useState([]);
   const [devices, setDevices] = useState([]);
   const [pageState, setPageState] = useState("home");
-  const [currDevice, setCurrDevice] = useState(null);
+  const [currDeviceId, setCurrDeviceId] = useState(null);
   const [currDeviceApps, setCurrDeviceApps] = useState([]);
 
   useEffect(() => {
@@ -34,9 +34,9 @@ function App() {
       }
     }
 
-    const fetchDeviceApps = async (currDevice) => {
+    const fetchDeviceApps = async (currDeviceId) => {
       try {
-        const response = await fetch(`/api/web/deviceApps/${currDevice.Id}`);
+        const response = await fetch(`/api/web/deviceApps/${currDeviceId}`);
         const data = await response.json();
         setCurrDeviceApps(data);
       } catch (error) {
@@ -47,9 +47,11 @@ function App() {
     if (user) {
       fetchApps();
       fetchDevices();
-      fetchDeviceApps();
+      if (currDeviceId) {
+        fetchDeviceApps(currDeviceId);
+      }
     }
-  }, []);
+  }, [currDeviceId]);
 
   return (
     <>
@@ -84,7 +86,7 @@ function App() {
             </div>
           )) : null} */}
           {pageState === "home" && devices ? devices.map(device => (
-            <div key={device.id}>
+            <div key={device.id} onClick={() => {setCurrDeviceId(device.id); setPageState("deviceapps")}}>
               <h2>{device.name}</h2>
               <p>ID: {device.id}</p>
               <p>IMEI: {device.imei}</p>
@@ -101,10 +103,6 @@ function App() {
 
       </section>
 
-      <div className="ticks"></div>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
     </>
   )
 }
