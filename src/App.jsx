@@ -85,19 +85,19 @@ function App() {
               <img height="100" width="100" src={app.imageLink} alt={app.displayname} />
             </div>
           )) : null} */}
-          {pageState === "home" && devices ? devices.map(device => (
+          {pageState === "home" && (devices != [] ? devices.map(device => (
             <div key={device.id} onClick={() => {setCurrDeviceId(device.id); setPageState("deviceapps")}}>
               <h2>{device.name}</h2>
               <p>ID: {device.id}</p>
               <p>IMEI: {device.imei}</p>
             </div>
-          )) : <p>There are no devices associated with your account.</p>}
-          {pageState === "deviceapps" && currDeviceApps ? currDeviceApps.map(app => (
+          )) : <p>There are no devices associated with your account.</p>)}
+          {pageState === "deviceapps" && (currDeviceApps != [] ? currDeviceApps.map(app => (
             <div key={app.displayname}>
               <h2>{app.displayname}</h2>
               <img height="100" width="100" src={app.imageLink} alt={app.displayname} />
             </div>
-          )) : <p>No apps for this device.</p>}
+          )) : <p>No apps for this device.</p>)}
         </div>
 
 
