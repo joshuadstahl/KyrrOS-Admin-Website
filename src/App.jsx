@@ -93,12 +93,12 @@ function App() {
               <p>IMEI: {device.imei}</p>
             </div>
           )) : <p>There are no devices associated with your account.</p>)}
-          {pageState === "deviceapps" && (currDeviceApps != [] ? (currDeviceApps.map(app => (
+          {pageState === "deviceapps" && (currDeviceApps.map(app => (
             <div key={app.displayname}>
               <h2>{app.displayname}</h2>
               <img height="100" width="100" src={app.imageLink} alt={app.displayname} />
             </div>
-          )) && <a href="#"onClick={() => {setCurrDeviceId(0); setPageState("home")}}>Back</a>) : <p>No apps for this device.</p>)}
+          ) && <a href="#"onClick={() => {setCurrDeviceId(0); setPageState("home")}}>Back</a>) : <p>No apps for this device.</p>)}
         </div>
 
 
